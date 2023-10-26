@@ -2,8 +2,15 @@ import numpy as np
 from flask import Flask, request, jsonify, render_template
 import pickle
 from sklearn.preprocessing import StandardScaler
+from flask_cors import CORS
 
 app = Flask(__name__,static_url_path='/static')
+CORS(app, resources={r"/*": {"origins": ["http://localhost",
+                                          "http://localhost:8080",
+                                          "https://myapp.herokuapp.com",
+                                          "http://www.e-hospital.ca/gastroImagePrediction",
+                                          "http://www.e-hospital.ca",
+                                          "http://localhost:5000"]}})
 model = pickle.load(open('model.pkl', 'rb'))
 scaler = pickle.load(open('scaler.pkl', 'rb'))
 
